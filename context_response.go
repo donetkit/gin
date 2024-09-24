@@ -1,6 +1,9 @@
 package gin
 
-import "github.com/gin-gonic/gin/binding"
+import (
+	"github.com/gin-gonic/gin/binding"
+	"github.com/gin-gonic/gin/valid"
+)
 
 var MsgFlags = map[int]string{
 	SUCCESS:       "请求成功",
@@ -120,13 +123,13 @@ func (c *Context) Exception(messages ...string) {
 func (c *Context) ShouldBindWithValid(s interface{}) error {
 	b := binding.Default(c.Request.Method, c.ContentType())
 	_ = c.ShouldBindWith(s, b)
-	valid := Validation{}
-	check, err := valid.Valid(s)
+	validation := valid.Validation{}
+	check, err := validation.Valid(s)
 	if err != nil {
 		return err
 	}
 	if !check {
-		return valid.Errors[0]
+		return validation.Errors[0]
 	}
 	return nil
 }
