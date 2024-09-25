@@ -478,14 +478,31 @@ func (v *Validation) Valid(obj interface{}) (b bool, err error) {
 			if vf.Name == "Required" {
 				hasRequired = true
 			}
-
 			currentField := objV.Field(i).Interface()
-			if objV.Field(i).Kind() == reflect.Ptr {
-				if objV.Field(i).IsNil() {
-					currentField = ""
-				} else {
-					currentField = objV.Field(i).Elem().Interface()
+
+			if objV.Field(i).Kind() == reflect.Slice {
+				valSlice := reflect.ValueOf(currentField)
+				for ii := 0; ii < valSlice.Len(); ii++ {
+					v.Valid(valSlice.Index(ii).Interface())
 				}
+			}
+
+			if objV.Field(i).Kind() == reflect.Ptr {
+				v.Valid(currentField)
+				//if objV.Field(i).IsNil() {
+				//	currentField = ""
+				//} else {
+				//	currentField = objV.Field(i).Elem().Interface()
+				//}
+			}
+
+			if objV.Field(i).Kind() == reflect.Struct {
+				v.Valid(currentField)
+				//if objV.Field(i).IsNil() {
+				//	currentField = ""
+				//} else {
+				//	currentField = objV.Field(i).Elem().Interface()
+				//}
 			}
 
 			chk := Required{}.IsSatisfied(currentField)

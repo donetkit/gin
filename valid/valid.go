@@ -75,7 +75,7 @@ func (v *Validation) apply(chk Validator, obj interface{}) *Result {
 	}
 
 	err := &ErrorValidation{
-		Message:    Label + " " + chk.DefaultMessage(),
+		Message:    Label + chk.DefaultMessage(),
 		Key:        key,
 		Name:       Name,
 		Field:      Field,

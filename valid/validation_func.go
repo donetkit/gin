@@ -104,3 +104,8 @@ func (v *Validation) Phone(obj interface{}, key string) *Result {
 func (v *Validation) ZipCode(obj interface{}, key string) *Result {
 	return v.apply(ZipCode{Match{Regexp: zipCodePattern}, key}, obj)
 }
+
+// Repeat Test that the obj is remove duplicates
+func (v *Validation) Repeat(obj interface{}, key string) *Result {
+	return v.apply(&Repeat{key}, obj)
+}
