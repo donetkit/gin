@@ -10,6 +10,7 @@ var CanSkipFunc = map[string]struct{}{
 	"Tel":     {},
 	"Phone":   {},
 	"ZipCode": {},
+	"Url":     {},
 }
 
 // MessageTmpfs store command validate template
@@ -35,6 +36,7 @@ var MessageTmpfs = map[string]string{
 	"Phone":        "必须是有效的电话号码或者手机号码",
 	"ZipCode":      "必须是有效的邮政编码",
 	"Repeat":       "必须是不重复的数据",
+	"Url":          "必须是有效的Url地址",
 	//"Required":     "Can not be empty",
 	//"Min":          "Minimum is %d",
 	//"Max":          "Maximum is %d",
@@ -55,6 +57,7 @@ var MessageTmpfs = map[string]string{
 	//"Tel":          "Must be valid telephone number",
 	//"Phone":        "Must be valid telephone or mobile phone number",
 	//"ZipCode":      "Must be valid zipcode",
+	//"Url":          "必须是有效的Url地址",
 }
 
 var once sync.Once

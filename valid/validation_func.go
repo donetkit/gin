@@ -109,3 +109,8 @@ func (v *Validation) ZipCode(obj interface{}, key string) *Result {
 func (v *Validation) Repeat(obj interface{}, key string) *Result {
 	return v.apply(&Repeat{key}, obj)
 }
+
+// Url Test that the obj is URL if type is string
+func (v *Validation) Url(obj interface{}, key string) *Result {
+	return v.apply(Url{key}, obj)
+}
